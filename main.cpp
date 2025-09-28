@@ -83,6 +83,15 @@ bool valid(int number, int guess, int black_pegs, int white_pegs, int num_digits
 
 }
 
+bool heuristic(int score, int ans_size) {
+    static int turns = 0;
+    if(turns < 1 && score < ans_size/8) {
+        turns++;
+        return true;
+    }
+    return false;
+}
+
 int main()
 {
 	int num_digits;
@@ -139,6 +148,8 @@ int main()
 			if(max_local_score > 0 && max_local_score < min_score) {
 				min_score = max_local_score;
 				guess = num;
+                if(heuristic(max_local_score, possible_answers.size()))
+                    break;
 			}
 		}
 

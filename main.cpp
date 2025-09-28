@@ -37,14 +37,14 @@ bool valid(int number, int guess, int black_pegs, int white_pegs, int num_digits
 		guess /= 10;
 	}
 
-	int kn = k + 1;
+	int kn = k;
 	while(number != 0) {
 		digits_number[kn] = number % 10;
 		kn++;
 		number /= 10;
 	}
 
-	int kg = k + 1;
+	int kg = k;
 	while(guess != 0) {
 		digits_guess[kg] = guess % 10;
 		kg++;
@@ -109,7 +109,7 @@ int main()
 			}
 		}
 
-		// check all possible answers and see get the minimal worst value
+		// check all possible answers and see the minimal worst value
 		int min_guess;
 		int min_score = max_value;
 		for(int num = 0; num < max_value; num++) {
@@ -119,7 +119,7 @@ int main()
 					if(wp + bp <= num_digits) {
 						int local_score = 0;
 						for(int ans : possible_answers) {
-							if(valid(ans, num, bp, wp, num_digits)) 
+							if(valid(ans, num, bp, wp, num_digits))
 								local_score++;
 						}
 
@@ -130,7 +130,7 @@ int main()
 				}
 			}
 
-			if(max_local_score < min_score) {
+			if(max_local_score > 0 && max_local_score < min_score) {
 				min_score = max_local_score;
 				guess = num;
 			}

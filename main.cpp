@@ -63,9 +63,15 @@ bool valid(int number, int guess, int black_pegs, int white_pegs, int num_digits
 
 	int number_white_pegs = 0;
 	for(int i = 0; i < num_digits; i++) {
+        if(digits_guess[i] == digits_number[i])
+            continue;
 		for(int j = 0; j < num_digits; j++) {
-			if(i != j && digits_number[i] == digits_guess[j]) {
+			if(i != j &&
+                   // digits_number[j] != digits_guess[j] && // don't count if it has already been matched with a black peg
+                    //digits_number[i] != digits_guess[i] && // don't count if it has already been matched with a black peg
+                    digits_guess[i] == digits_number[j]) {
 				number_white_pegs++;
+                break;
 			}
 		}
 	}

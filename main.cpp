@@ -141,5 +141,7 @@ int main()
 
 	}
 
+    printf("Solution: %d\n", *possible_answers.begin());
+
 	return 0;
 }
